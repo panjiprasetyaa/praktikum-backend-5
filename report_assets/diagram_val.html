@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #ffffff; padding: 25px; margin: 0; display: flex; justify-content: center; }
+  .container { width: 920px; }
+  .title { text-align: center; font-size: 18px; font-weight: bold; color: #0f172a; margin-bottom: 22px; }
+  .grid { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+  .node { padding: 11px 22px; border-radius: 8px; font-size: 14px; font-weight: bold; text-align: center; width: 440px; }
+  .start { background: #e0e7ff; border: 2px solid #6366f1; color: #3730a3; }
+  .decision { background: #fef3c7; border: 2px solid #f59e0b; color: #92400e; width: 480px; }
+  .success { background: #dcfce7; border: 2px solid #22c55e; color: #166534; }
+  .fail { background: #fee2e2; border: 2px solid #ef4444; color: #991b1b; }
+  .arrow { font-size: 18px; color: #64748b; font-weight: bold; text-align: center; }
+  .branch { display: flex; gap: 24px; width: 100%; justify-content: center; }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="title">DIAGRAM ALUR FORM REQUEST VALIDATION & ERROR HANDLING (LARAVEL 13)</div>
+  <div class="grid">
+    <div class="node start">HTTP POST /products (Form Submission Input Pengguna)</div>
+    <div class="arrow">↓</div>
+    <div class="node decision">Form Request Validation Sesuai Rules?<br><span style="font-size:12px; font-weight:normal;">(StoreProductRequest: required, slug unique, price & stock min 0)</span></div>
+    <div class="branch">
+      <div style="display:flex; flex-direction:column; align-items:center;">
+        <span style="font-size:12px; color:#ef4444; font-weight:bold;">TIDAK (Validasi Gagal)</span>
+        <div class="arrow">↓</div>
+        <div class="node fail" style="width:340px;">HTTP 422 Unprocessable Entity<br>Redirect Back with <code>$errors</code> Session Flash<br>Tampilkan Alert Error Bahasa Indonesia</div>
+      </div>
+      <div style="display:flex; flex-direction:column; align-items:center;">
+        <span style="font-size:12px; color:#166534; font-weight:bold;">YA (Validasi Lolos)</span>
+        <div class="arrow">↓</div>
+        <div class="node success" style="width:340px;">Lanjut ke <code>ProductController@store</code><br>Simpan Data ke Database SQLite (Tabel products)<br>Redirect ke /products dengan Flash Success</div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
