@@ -23,4 +23,10 @@ return Application::configure(basePath: dirname(__DIR__))
         $exceptions->render(function (\Modules\Products\Exceptions\InsufficientStockException $e, $request) {
             return $e->render($request);
         });
+        $exceptions->render(function (\Modules\Library\Exceptions\BookNotAvailableException $e, $request) {
+            return $e->render($request);
+        });
+        $exceptions->render(function (\Modules\Library\Exceptions\AuthorHasBooksException $e, $request) {
+            return $e->render($request);
+        });
     })->create();
